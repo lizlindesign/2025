@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional iFrame</title>
+    <style>
+        /* Basic styling for the container */
+        .iframe-container {
+            width:100%;
+			height: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            max-width: 500px; /* Optional max width for the image */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="iframe-container" id="iframeContainer"></div>
+
+<script>
+    function loadIframe() {
+        const iframeContainer = document.getElementById('iframeContainer');
+        const screenWidth = window.innerWidth;
+        
+        if (screenWidth > 730) {
+            iframeContainer.innerHTML = `
+                <iframe src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FE7CHf5kLL87tsfbip20MHd%2F%25F0%259F%2596%258D%25EF%25B8%258F-H%2526W-Customer-Journey-Design-Sprint-(Copy)%3Fpage-id%3D1574%253A120546%26node-id%3D2759-198816%26viewport%3D766%252C439%252C0.06%26t%3DbyrFIOlSQNmhdaL2-1%26scaling%3Dscale-down%26starting-point-node-id%3D2759%253A198816%26content-scaling%3Dfixed&hide-ui=1" 
+                    width="100%" 
+                    height="600" 
+                    style="border: none;">
+                </iframe>
+            `;
+        } else {
+            iframeContainer.innerHTML = `
+                <img src="https://marketplace.canva.com/EAFMEgXAvG4/1/0/739w/canva-login-page-mobile-prototype-4lbW8es97VU.jpg" 
+                    alt="Figma Preview" 
+                    onclick="window.open('https://www.figma.com/proto/E7CHf5kLL87tsfbip20MHd/%F0%9F%96%8D%EF%B8%8F-H%26W-Customer-Journey-Design-Sprint-(Copy)?page-id=1574%3A120546&node-id=5263-361430&viewport=766%2C439%2C0.06&t=byrFIOlSQNmhdaL2-1&scaling=scale-down&starting-point-node-id=5263%3A361430&content-scaling=fixed&show-proto-sidebar=1', '_blank', 'width=500,height=800,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no');" 
+                />
+            `;
+        }
+    }
+
+    // Load iframe or image on initial load
+    loadIframe();
+
+    // Reload iframe or image on window resize
+    window.onresize = loadIframe;
+</script>
+
+</body>
+</html>

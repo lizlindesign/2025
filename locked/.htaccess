@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Access to /locked"
+AuthUserFile /kunden/homepages/11/d643223963/htpasswd
+Require user lin

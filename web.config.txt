@@ -1,0 +1,3 @@
+<httpErrors errorMode="Custom">
+<error statusCode="404" path="error_404.html" />
+</httpErrors>

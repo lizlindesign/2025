@@ -1,0 +1,923 @@
+abbr, address, article, aside, audio, b, blockquote, body, caption, cite, code, dd, del, dfn, dialog, div, dl, dt, em, fieldset, figure, footer, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, samp, section, small, span, strong, sub, sup, table, tbody, td, tfoot, th, thead, time, tr, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    outline: 0;
+	/* -- tried serif and generous line height for body text -> should do it at lower level to --
+	font-family: "Plantin Light",serif;
+    line-height: 1.65em;
+    letter-spacing: .03em;
+	font-weight: 400;
+    font-style: normal;
+	font-size: 1rem;
+	*/
+}
+article, aside, dialog, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+body {
+  min-width: 333px;/*** a min width to prevent crash on tiny screens  ***/
+} 
+
+/*** background-attachment: fixed; not working on mobile  see stackoverflow.com/a/43058483/7765675  12/04/2021 ***/
+body.jgi:after {
+  content: "";
+	display: block;
+  position: fixed; /* stretch a fixed position to the whole screen */
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100vh; /* fix for mobile browser address bar appearing disappearing */
+  background-image: url("../img/03.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  /***  background-attachment: fixed; background image doesn't scroll  this works on desktop but messes up iOS ***/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index: -10; /*** background image statys in the background  ***/
+}
+
+
+
+a {
+	text-decoration: none;
+}
+/*** The fixed Side */
+.side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 50px;
+  border-right: 1px dashed rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.5);
+  font-family: "nimbus-sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.0925rem;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.05, 0.69, 0.14, 1);
+}
+.side:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+.side .side__inner {
+  position: relative;
+  height: 100%;
+  white-space: nowrap;
+}
+.side a {
+  color: inherit;
+  word-spacing: 0;
+  transition: all 0.3s cubic-bezier(0.05, 0.69, 0.14, 1);
+}
+.side .top,
+.side .bottom {
+  position: absolute;
+  left: 0;
+  transform: rotate(-90deg) perspective(1px);
+  transform-origin: 50px 50px;
+  height: 50px;
+  line-height: 50px;
+  white-space: nowrap;
+  word-spacing: 0.5rem;
+}
+.side .top {
+  top: 25px;
+  text-align: right;
+  color: black;
+}
+.side .bottom {
+  top: auto;
+  bottom: 95px;
+}
+/***
+.side .bottom:hover a {
+  color: rgba(0, 0, 0, 0.2);
+}
+*/
+.side .bottom:hover a:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/*** The first navigation */
+.anchornav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.anchornav li {
+  display: block;
+}
+.anchornav li::after {
+  content: "";
+  width: 1.3rem;
+  display: block;
+  height: 2px;
+  background: black;
+}
+.anchornav li:last-child::after {
+  display: none;
+}
+.anchornav li a {
+  display: block;
+  padding: 1em 0;
+  font-family: "nimbus-sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  letter-spacing: 0.02em;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.05, 0.69, 0.14, 1);
+}
+.anchornav li a span {
+  display: inline;
+  padding: 0 0 0 0.3em;
+  opacity: 0.4;
+  letter-spacing: normal;
+  font-family: "ff-meta-serif-web-pro", serif;
+  text-transform: none;
+}
+.anchornav li a:hover {
+  color: #de5f5f;
+}
+.anchornav li a:hover span {
+  opacity: 1;
+  color: #181818;
+}
+
+/*** The different sections on index page*/
+.section {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+   min-height: 30vh;
+	/*** height: calc(100vw * 6/23);*/
+  width: 100%;
+  align-content: center;
+  padding: 6vh 50px 6vh 75px;
+}
+/*** Child experience map */
+.section2 {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  align-content: left;
+  height: calc(100vw * 16/23);
+}
+
+.section svg {
+  position: absolute;
+  top: -49px; /*** get rid of the thin gap between the chisel shape svg and the section block  ***/
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+}
+.section svg.bottom {
+  bottom: 0;
+  top: auto;
+  fill: grey;
+}
+
+.section--UI {
+  background-color: rgba(25, 25, 8, 0.8);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+.section--UI svg {
+  top: -49px; /*** get rid of the thin gap between the chisel shape svg and the section block  ***/
+  fill: #3A99D8;
+  bottom: -49px;
+}
+
+.section--jgiHead {
+  color: white;
+}
+.section.section--jgiHead:after { /**  only apply to the header NOT the carousel  **/
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000;
+    opacity: .2; /**  overlay on the image, helps the white text to have a better contrast **/
+    content: "";
+}
+.section--jgiHead .section__port { 
+    position: relative;
+    z-index: 1;
+	color: white;
+	opacity:1;
+}
+.section--jgiHead svg {
+  top: -49px; /*** get rid of the thin gap between the chisel shape svg and the section block  ***/
+  fill: #00829B;/*** #3A99D8  ***/
+  bottom: -49px;
+}
+
+.section--work {
+    background: linear-gradient(to right, rgba(28,56,119,0.82), rgba(28,56,119,0.05)), url(../img/CWDS_tweet_bgFlip.jpg) right;
+	background-repeat: no-repeat;
+    background-size: cover;
+	color: white;
+}
+
+.section--portfolio3 {
+  background-color: orange;
+  color: white;
+}
+.section--portfolio3 svg {
+  top: -49px; /*** get rid of the thin gap between the chisel shape svg and the section block  ***/
+  fill: orange;
+}
+.section--portfolio3 svg.bottom {
+  bottom:-49px;
+  fill: orange;
+}
+.section--shopify {
+  background-image: linear-gradient(to bottom right, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); 
+  color: white;
+}
+.section--shopify svg {
+  top: -49px; /*** get rid of the thin gap  ***/
+  fill: #96bf48;
+}
+.section--shopify svg.bottom {
+  top: auto;
+  bottom: -49px;
+  fill: #96bf48;
+}
+
+.section--autozone {
+  background-image: radial-gradient( circle 360px at 11.8% 23.5%,  rgba(240,30,92,1) 0%, rgba(244,49,74,1) 30.5%, rgba(249,75,37,1) 56.1%, rgba(250,88,19,1) 75.6%, rgba(253,102,2,1) 100.2% );
+  color: white;
+}
+.section--autozone svg {
+  top: -49px; /*** get rid of the thin gap between the chisel shape svg and the section block  ***/
+  fill: yellowgreen;
+}
+.section--autozone svg.bottom {
+  top: auto;
+  bottom: -49px;
+  fill: yellowgreen;
+}
+
+.section--walmart {
+	background-image: linear-gradient(to bottom right, rgba(15,110,120,1), rgba(0,65,90,1), rgba(0,65,87,1), rgba(0,85,101,1), rgba(35,95,101,1)); 
+	background-size: 100%;
+	background-repeat: no-repeat;
+  	color: white;
+}
+.section--walmart svg {
+  top: -49px; /*** get rid of the thin gap  ***/
+  fill: #96bf48;
+}
+.section--walmart svg.bottom {
+  top: auto;
+  bottom: -49px;
+  fill: #96bf48;
+}
+
+/*** The different sections on portfolio pages*/
+
+.section--gray {
+  background-color: aliceblue;
+}
+.section--gray svg {
+  fill: aliceblue;
+}
+.section--gray svg.bottom {
+  top: auto;
+  bottom: -49px; /*** get rid of the thin gap between the chisel shape svg and the section block  ***/
+  fill: aliceblue;
+}
+.section--shopifyGray {
+  background-color: #F4F4F4;
+}
+
+.section--white {
+  background-color: white;
+}
+.section--darkblue {
+  background-color: #041E42;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.section--tight, .section--white svg {
+  fill: rgba(255,255,255,0.60);
+}
+.section--bfcm {
+  background-image: linear-gradient(to bottom, #E4F3FC, #E4F3FC, #E5F4FD, #E7F4FE, #E9F5FD, #EDF8FE, #ECF7FD, #EEF7FC, #F0F7FD, #F1F8FC, #F3F9FD, #F4FAFC, #F6FBFD, #F9FCFD, #F6F8FD, #F6F8FD, #F6F8FD);  /* ---BFCM_24s_final6.mps's background:  linear-gradient(to bottom, #CFEDEF,#CFEDEF, #D7EDED, #E0F2EF, #E6F6EF, #F1F9F2, #EAF3EE ); ---*/
+}
+.section--gray, .section--white, .section--bfcm, .section--shopifyGray {
+    padding: 2vh 50px 0 75px;
+}
+	/* --- tighten the space top & bottom for project summary ---*/
+.section--tight {
+    padding: 0 50px 1vh 75px;
+	background-color: rgba(255,255,255,0.60);
+}
+
+.section--WMH {
+  	fill:#F2F8FD;
+  	background: #F2F8FD;
+	margin-bottom: -40px;
+}
+
+	/* --- Fonts & medias --- */
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h5 {
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: bold;
+  margin: 0 0 0.5em;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+@media screen and (min-width:960px){
+	h1, .h1, h2, .h2, h3, .h3 {
+		letter-spacing: -2px;
+	}}
+
+.section__port h1 {
+	font-size: 55px;
+}
+@media screen and (min-width:730px){
+  .section__port h1 {
+    font-size: 66px;
+  }
+}
+@media screen and (min-width:960px){
+  .section__port h1 {
+    font-size: 88px;
+  }
+}
+
+.section__port .pre {
+  display: inline-block;
+  font-family: "ff-meta-serif-web-pro", serif;
+  font-size: 0.9rem;
+  opacity: 1;
+  letter-spacing: 1.4px;
+  word-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+  color: inherit;
+}
+
+@media screen and (min-width:960px){
+  .section__port .pre {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-top: 0px;
+}
+}
+
+.section__port .lead {
+	display: inline-block;
+	font-family: "ff-meta-serif-web-pro", serif;
+	font-size: 1.3rem;
+	font-weight: 500;
+}
+@media screen and (min-width:960px){
+  .section__port .lead {
+    font-size: 1.8rem;
+  }
+}
+
+dl, h1, h2, h3, ol, p, ul {
+    margin-top: 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+img {
+    border: 0;
+}
+a {
+    color: inherit;
+}
+
+/*--  .m-block  --*/
+
+.m-block {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+}
+@media screen and (min-width:730px) {
+    .m-block {
+    flex-direction: row-reverse;
+}}
+.m-block.m-block--anchor {
+    padding-bottom: 0;
+	flex-direction: row;
+	justify-content: space-between;/*--  in case there's an icon, it will flesh to the right  --*/
+	align-items: center;
+	position: relative;
+	z-index: 20;
+}
+
+.m-block.m-block--links {
+    padding-bottom: 24px;
+}
+.container:last-child .m-block.m-block--links {
+    padding-bottom: 60px;
+}
+
+@media screen and (max-width:729px) {
+    .m-block__aside {
+    padding-bottom: 24px;
+}}
+
+@media screen and (min-width:730px)and (max-width:959px) {
+    .m-block__aside, .m-block__content {
+    width: calc((100vw - 296px)/8*4 + 84px);
+}}
+@media screen and (min-width:960px)and (max-width:1279px) {
+    .m-block__aside, .m-block__content {
+    width: calc((100vw - 576px)/16*8 + 209px);
+}}
+@media screen and (min-width:1280px)and (max-width:1919px) {
+    .m-block__aside, .m-block__content {
+    width: calc((100vw - 576px)/16*8 + 199px);
+}}
+@media screen and (min-width:1920px) {
+    .m-block__aside, .m-block__content {
+    width: 878px;
+}}
+/*--  This helps to align the block on the left  --*/
+@media screen and (min-width:730px)and (max-width:959px) {
+    .m-block__content {
+    margin-left: 28px;
+}
+}@media screen and (min-width:960px)and (max-width:1279px) {
+    .m-block__content {
+    margin-left: 32px;
+}
+}@media screen and (min-width:1280px)and (max-width:1919px) {
+    .m-block__content {
+    margin-left: 32px;
+}
+}@media screen and (min-width:1920px) {
+    .m-block__content {
+    margin-left: 32px;
+}
+}@media screen and (min-width:730px)and (max-width:959px) {
+    .m-block--full .m-block__content {
+    width: 100%;
+    margin-left: 0;
+}
+}
+
+/* Embedded Figma prototype */
+
+    .WMH_block {
+    height: 560px;
+	margin: 0 auto;
+	border: none;
+	z-index: 1;
+}
+
+@media screen and (min-width:730px) and (max-width:1279px){
+    .WMH_block {
+	height: calc(30vw + 40px); /* Scale height proportionally */
+    min-height: 560px;
+    max-height: 868px;
+}}
+@media screen and (min-width:1280px)and (max-width:1919px){
+    .WMH_block {
+	height: calc(30vw + 50px); /* Scale height proportionally */
+    min-height: 560px;
+    max-height: 968px;
+}}
+@media screen and (min-width:1920px){
+    .WMH_block {
+	height: calc(30vw); /* Scale height proportionally */
+    min-height: 560px;
+    max-height: 1068px;
+}}
+
+.WMH_block iframe {
+	height: 600px; 
+	width:100%; 
+	min-height: 560px;
+	max-height: 868px;
+	border: none;
+	margin-top: -40px;
+}
+
+@media screen and (min-width:960px) and (max-width:1279px) {
+    .WMH_block iframe {
+	height: 660px; /* Scale height proportionally */
+	margin-top: -75px;
+}}
+@media screen and (min-width:1280px) and (max-width:1919px) {
+    .WMH_block iframe {
+	height: 730px; /* Scale height proportionally */
+	margin-top: -99px;
+}}
+@media screen and (min-width:1920px) {
+    .WMH_block iframe {
+	height: 810px; /* Scale height proportionally */
+	margin-top: -105px;
+}}
+
+.WMH_block img {
+	height: 520px; 
+	opacity: 1;
+}
+.WMH_block img:hover {
+	opacity: .8;
+	cursor: pointer;
+}
+
+/* Style for the WMH mobile placeholder image */
+.mobile-placeholder {
+    display: none; /* Initially hidden */
+    width: auto;
+	height:100%;
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+}
+/* Media query to hide the iframe and show the image on small screens */
+@media screen and (max-width: 730px) {
+    .WMH_block iframe {
+        display: none; /* Hide the iframe on mobile */
+    }
+    .mobile-placeholder {
+        display: block; /* Show the placeholder image */
+    }
+}
+.m-block--break {
+	padding-top: 30px; 
+	padding-bottom: 20px; 
+}
+
+@media screen and (max-width:960px){
+	.m-block--break {
+	padding-top: 20px;
+	padding-bottom: 10px; 
+}}
+
+.caption {
+    /*background-color: orange;*/
+  color: dimgray;
+  padding: 0px 20px 0px 20px;
+  text-align: right;
+}
+
+.m-block--bordered .m-block__code, .m-block--bordered .m-block__img img {
+    outline: 1px solid rgba(0, 0, 0, .1);
+    outline-offset: -1px;
+}
+
+.m-block__quote {
+    position: relative;
+}
+.m-block__quote:before {
+    position: absolute;
+    top: 0;
+    left: -.5em;
+}
+.m-block__quote:after, .m-block__quote:before {
+    display: inline;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    content: '"'}
+.m-block__citation {
+    display: block;
+    margin-top: 16px;
+    color: #6f6f6f;
+}
+
+@media screen and (min-width:1280px)and (max-width:1919px) {
+     .m-block__citation, .m-block__quote, .m-block__title {
+    width: calc((100vw - 576px)/16*7 + 192px);
+}
+}@media screen and (min-width:1920px) {
+    .m-block__citation, .m-block__quote, .m-block__title {
+    width: 800px;
+}}
+
+.m-block--title {
+    padding-bottom: 24px;
+}
+
+/* ---- Video control only shows on hover ---- */
+/* ---- https://stackoverflow.com/questions/48693832/need-to-show-html5-video-controls-on-hover-or-play ---- */
+
+video[controls]::-webkit-media-controls-panel {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+video:hover{
+	cursor: pointer;
+}
+
+
+/* ---- Slick Slider ---- */
+
+.slick-slider {
+  position: relative;
+  display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent
+}
+
+.slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0
+}
+
+.slick-list:focus {
+  outline: none
+}
+
+.slick-list.dragging {
+  cursor: hand
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  transform: translate3d(0, 0, 0)
+}
+
+.slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block
+}
+
+.slick-track:before,
+.slick-track:after {
+  display: table;
+  content: ''
+}
+
+.slick-track:after {
+  clear: both
+}
+
+.slick-loading .slick-track {
+  visibility: hidden
+}
+
+.slick-slide {
+  display: none;
+  float: left;
+  height: 100%;
+  min-height: 1px
+}
+
+.slick-slide.dragging img {
+  pointer-events: none
+}
+
+.slick-initialized .slick-slide {
+  display: block
+}
+
+.slick-loading .slick-slide {
+  visibility: hidden
+}
+
+.slick-vertical .slick-slide {
+  display: block;
+  height: auto;
+  border: 1px solid transparent
+}
+
+
+/* Slider Theme Style */
+
+.container:after,
+.container .Head:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.container .Head {
+  font-family: "ff-meta-serif-web-pro", serif;
+  font-size: 36px;
+  opacity: 0.8;
+  letter-spacing: 1.4px;
+  word-spacing: 0.2rem;
+  text-transform: uppercase;
+  height: 48px;
+  over-flow: hidden;
+  border-bottom:1px solid rgba(0,0,0,.25);
+  margin-top: 40px;
+}
+
+.container .Head .Arrows {
+  float: right;
+}
+
+.container .Head .fa-angle-left,
+.container .Head .fa-angle-right {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-top: px;
+  background: #C2C2C2;
+  color: #FFF;
+  margin-left: 8px;
+  cursor: pointer;
+  font-family: 'Font Awesome 5 Free';
+  font-size: 24px;
+  text-align: center;
+  transition: all 0.5s;
+  padding: 4px 0;
+}
+@media screen and (min-width:960px){
+  .container .Head .fa-angle-left,
+.container .Head .fa-angle-right {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-top: px;
+  background: #C2C2C2;
+  color: #FFF;
+  margin-left: 12px;
+  cursor: pointer;
+  font-family: 'Font Awesome 5 Free';
+  font-size: 32px;
+  text-align: center;
+  transition: all 0.5s;
+  padding: 5px 0;
+  }
+}
+.container .Head .fa-angle-right:hover,
+.container .Head .fa-angle-left:hover {
+  background: #777777;
+}
+	
+.container .Head .fa-angle-right:before {
+  display: block;
+}
+
+.container .Head .fa-angle-left:before {
+  display: block;
+}
+
+.SlickCarousel {
+  margin: 0 -7.5px;
+  margin-top: 10px;
+}
+
+.ProductBlock .section {
+	padding: 0px 0px;
+}
+.slideContent {
+  height: 100%;
+  padding: 32px 16px 16px 20px;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.slideContent .pre {
+	font-size: 0.9rem;
+	opacity: 1;
+	text-transform: uppercase;
+}
+.slideContent h2 {
+	font-size: 2rem;
+}
+.slideContent p {
+	font-size: 1rem;
+	position: absolute;
+	bottom: 50px;
+	opacity: 1;
+}
+
+.ProductBlock {
+    margin: 0 10px;
+    width: 300px;
+	height: 400px;
+}
+
+.ProductBlock:hover {
+    box-shadow: 1px 1px 80px rgba(0, 0, 0, 0.2) inset;
+	cursor: pointer;
+}
+
+.ProductBlock:hover h2 {
+	text-decoration: underline;
+}
+
+.ProductBlock.section--portfolio5,  .ProductBlock.section--portfolio6{
+	background-color: #e6e6e6;
+}
+
+.ProductBlock.section--JGI {
+	background: url("../img/03.jpg") no-repeat left;
+	color: white;
+}
+.ProductBlock.section--portfolio6 {
+	background: url("../img/3_capital.jpg") no-repeat center;
+	background-size: cover;
+}
+
+*,
+*:before, :after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+/*    container    */
+.container {
+margin-left: 0px;
+	margin-bottom: 30px;
+}
+	
+@media screen and (max-width:729px) {
+    .container {
+    width: calc(100vw - 98px);
+}
+}@media screen and (min-width:730px)and (max-width:959px) {
+    .container {
+    width: calc(100vw - 110px);
+}
+}@media screen and (min-width:960px)and (max-width:1279px) {
+    .container {
+    width: calc(100vw - 126px);
+
+}
+}@media screen and (min-width:1280px)and (max-width:1919px) {
+    .container {
+    width: calc(100vw - 146px);
+
+}
+}@media screen and (min-width:1920px) {
+    .container {
+    max-width: 1860px;  /* 1384px */
+    padding-right: 0;
+    padding-left: 0;
+}}
+
+/*   3 columns layout: liz_3col   */
+.liz_3col {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+/*@media screen and (max-width:729px) {
+    .liz_3col {
+    margin-right: -24px;
+    margin-left: -24px;
+    border-right: 0;
+    border-left: 0;
+}
+.liz_3col>* {
+    padding-right: 24px;
+    padding-left: 24px;
+}
+.liz_3col>* .a-dropdown__icon {
+    right: 24px;
+}
+}
+@media screen and (min-width:960px) {*/
+    .liz_3col {
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.liz_3col>* {
+    flex-grow: 1;
+    width: 33.33333%;
+	}
